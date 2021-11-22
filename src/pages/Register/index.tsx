@@ -90,7 +90,7 @@ export function Register() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Container>
                 <Header>
-                    <Title>Cadastre uma movimentação</Title>
+                    <Title>Registre uma nova{'\n'} movimentação</Title>
                 </Header>
                 <Form>
                     <Fields>

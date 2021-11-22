@@ -35,7 +35,7 @@ export function CategorySelect({
     return (
         <Container>
             <Header>
-                <Title>Escolha a sua categoria</Title>
+                <Title>Escolha uma categoria</Title>
             </Header>
             <FlatList
                 data={categories}

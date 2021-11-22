@@ -14,7 +14,7 @@ export const Container = styled.View`
 export const Header = styled.View`
     width: 100%;
     height: ${RFValue(90)}px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.green_sheen};
     align-items: center;
     justify-content: flex-end;
     padding-bottom: 19px;
