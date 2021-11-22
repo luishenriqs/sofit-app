@@ -16,7 +16,7 @@ export interface ITransactionCardProps {
     description: string;
     value: string;
     category: string;
-    date: string;
+    created_at: string;
 }
 
 interface IProps {
@@ -37,7 +37,7 @@ export const TransactionCard = ({ data }: IProps) => {
                     <Icon name={category.icon} />
                     <CategoryName>{category.name}</CategoryName>
                 </Category>
-                <Date>{data.date}</Date>
+                <Date>{data.created_at}</Date>
             </Footer>
         </Container>
     )

@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { ActivityIndicator } from 'react-native';
+import api from '../../services/api';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
 import { useTheme } from 'styled-components';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HighlightCard } from '../../Components/HighlightCard';
 import { 
     TransactionCard, ITransactionCardProps,
@@ -14,7 +14,6 @@ import {
     Header,
     UserWrapper,
     UserInfo,
-    Photo,
     User,
     UserGreeting,
     UserName,
@@ -23,7 +22,6 @@ import {
     Cards,
     Transactions,
     Title,
-    TransactionList,
 } from './styles';
 
 export interface IDataListProps extends ITransactionCardProps {
@@ -44,6 +42,7 @@ interface IHighlightData {
 export function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
     const [transaction, setTransaction] = useState<IDataListProps[]>([]);
+    const [transactions, setTransactions] = useState<IDataListProps[]>([]);
     const [entries, setEntries] = useState<IDataListProps[]>([]);
     const [expensives, setExpensives] = useState<IDataListProps[]>([]);
     const [highlightData, setHighlightData] = useState<IHighlightData>(
@@ -86,14 +85,14 @@ export function Dashboard() {
             }
             total = entriesTotal - expensivesTotal;
             const value = formattedAmount(Number(item.value));
-            const date = formattedDate(item.date)
+            const created_at = formattedDate(item.created_at)
             return {
                 id: item.id,
                 description: item.description,
                 type: item.type,
                 category: item.category,
                 value,
-                date,
+                created_at,
             }
         });
         return {transactionsFormatted, entriesTotal, expensivesTotal, total};
@@ -112,7 +111,7 @@ export function Dashboard() {
       }
       const lastTransaction = new Date(Math.max.apply(
         Math, collectionFiltered
-          .map((transaction) => new Date(transaction.date).getTime())  
+          .map((transaction) => new Date(transaction.created_at).getTime())  
         )
       )
       const lastDate = `${lastTransaction.getDate()} de ${lastTransaction
@@ -122,17 +121,15 @@ export function Dashboard() {
     };
 
     async function request() {
-        const dataKey = `@Sofit:transactions_user:${user.id}`;
-        const response = await AsyncStorage.getItem(dataKey);
-        const transactions = response ? JSON.parse(response) : [];
+        const response = await api.get('/transaction/');
+        setTransactions(response.data);
 
         const {
             transactionsFormatted,
             entriesTotal,
             expensivesTotal,
             total
-        } = formattedTransaction(transactions);
-
+        } = formattedTransaction(response.data);
 
         /* **********************[ALL TRANSACTIONS]************************** */
         // Used in listing;
@@ -204,12 +201,9 @@ export function Dashboard() {
                     <Header>
                         <UserWrapper>
                             <UserInfo>
-                                <Photo 
-                                    source={{uri: user.photo}}
-                                />
                                 <User>
-                                    <UserGreeting>Olá,</UserGreeting>
-                                    <UserName>{user.name}</UserName>
+                                    <UserGreeting>Olá, </UserGreeting>
+                                    <UserName>{user.user_name}</UserName>
                                 </User>
                             </UserInfo>
                             <LogoutButton onPress={signOut}> 
@@ -240,10 +234,13 @@ export function Dashboard() {
                     
                     <Transactions>
                         <Title>Listagem</Title>
-                        <TransactionList 
+                        <FlatList 
                             data={transaction}
+                            showsVerticalScrollIndicator={false}
                             keyExtractor={item => item.id}
-                            renderItem={({ item }) => <TransactionCard data={item} />}
+                            renderItem={({ item, index }) => (
+                                <TransactionCard data={item} />
+                            )}
                         />
                     </Transactions>
                 </>

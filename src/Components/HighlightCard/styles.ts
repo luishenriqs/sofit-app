@@ -8,12 +8,12 @@ interface TypeProps {
 
 export const Container = styled.View<TypeProps>`
     background: ${({ theme, type }) => 
-        type === 'total' ? theme.colors.secondary : theme.colors.shape
+        type === 'total' ? theme.colors.green_yellow : theme.colors.shape
     };
     width: ${RFValue(300)}px;
     border-radius: 5px;
-    padding: 19px 23px;
-    padding-bottom: ${RFValue(42)}px;
+    padding: 8px 23px;
+    padding-bottom: ${RFValue(15)}px;
     margin-right: 16px;
 `;
 
@@ -33,10 +33,10 @@ export const Title = styled.Text<TypeProps>`
 export const Icon = styled(Feather)<TypeProps>`
     font-size: ${RFValue(40)}px;
     ${({type}) => type === 'up' && css`
-        color: ${({ theme }) => theme.colors.success };
+        color: ${({ theme }) => theme.colors.green_yellow };
     `}
     ${({type}) => type === 'down' && css`
-        color: ${({ theme }) => theme.colors.attention };
+        color: ${({ theme }) => theme.colors.attention_light };
     `}
     ${({type}) => type === 'total' && css`
         color: ${({ theme }) => theme.colors.shape };
@@ -53,7 +53,7 @@ export const Amount = styled.Text<TypeProps>`
     };
     font-family: ${({ theme }) => theme.fonts.medium };
     font-size: ${RFValue(32)}px;
-    margin-top: 38px;
+    margin-top: 15px;
 `;
 
 export const LastTransaction = styled.Text<TypeProps>`

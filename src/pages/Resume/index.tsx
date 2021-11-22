@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import api from '../../services/api';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from '../../hooks/auth';
@@ -29,7 +30,7 @@ interface ITransactionProps {
     description: string;
     value: string;
     category: string;
-    date: string;
+    created_at: string;
 }
 
 export interface ICategoryData {
@@ -68,18 +69,15 @@ export function Resume() {
     };
 
     async function request() {
-        setIsLoading(false);
-        const dataKey = `@Sofit:transactions_user:${user.id}`;
-        const response = await AsyncStorage.getItem(dataKey);
-        const responseFormatted = response ? JSON.parse(response) : [];
+        const response = await api.get(`/transaction/findByType?type=down`);
 
         /* ***************[ONLY EXPENSIVES TRANSACTIONS]********************* */
         // 3 comparisons are made: same type, month, year;
-        const expensives = responseFormatted.filter(
+        const expensives = response.data.filter(
             (expensive: ITransactionProps) =>
             expensive.type === 'down' &&
-            new Date(expensive.date).getMonth() === selectedDate.getMonth() &&
-            new Date(expensive.date).getFullYear() === selectedDate.getFullYear()
+            new Date(expensive.created_at).getMonth() === selectedDate.getMonth() &&
+            new Date(expensive.created_at).getFullYear() === selectedDate.getFullYear()
         );
 
         // Sum of expenses for all categories;

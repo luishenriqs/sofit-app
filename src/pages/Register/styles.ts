@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    background-color: ${({ theme }) => theme.colors.primary };
+    background-color: ${({ theme }) => theme.colors.green_sheen };
     height: ${RFValue(113)}px;
     align-items: center;
     justify-content: flex-end;

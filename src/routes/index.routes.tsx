@@ -10,6 +10,7 @@ export function Routes() {
     return(
         <NavigationContainer>
             {user.user_name ? <AppRoutes /> : <AuthRoutes />}
+            {/* <AppRoutes /> */}
         </NavigationContainer>
     )
 }

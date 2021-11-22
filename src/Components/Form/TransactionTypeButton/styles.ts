@@ -16,10 +16,10 @@ export const Container = styled.View<IsActiveProps>`
     border-width: 2px;
     border-color: ${({ theme }) => theme.colors.sub_text };
     ${({ isActive, type }) => isActive && type === 'up' && css`
-        border-color: ${({ theme }) => theme.colors.success };
+        border-color: ${({ theme }) => theme.colors.green_sheen };
     `};
     ${({ isActive, type }) => isActive && type === 'down' && css`
-        border-color: ${({ theme }) => theme.colors.attention };
+        border-color: ${({ theme }) => theme.colors.attention_light };
     `};
 `;
 
@@ -35,10 +35,10 @@ export const Icon = styled(Feather)<IsActiveProps>`
     margin-right: 12px;
     color: ${({ theme }) => theme.colors.sub_text };
     ${({ isActive, type }) => isActive && type === 'up' && css`
-        color: ${({ theme }) => theme.colors.success };
+        color: ${({ theme }) => theme.colors.green_sheen };
     `};
     ${({ isActive, type }) => isActive && type === 'down' && css`
-        color: ${({ theme }) => theme.colors.attention };
+        color: ${({ theme }) => theme.colors.attention_light };
     `};
 `;
 
@@ -47,9 +47,9 @@ export const Title = styled.Text<IsActiveProps>`
     font-family: ${({ theme }) => theme.fonts.regular };
     color: ${({ theme }) => theme.colors.sub_text };
     ${({ isActive, type }) => isActive && type === 'up' && css`
-        color: ${({ theme }) => theme.colors.success };
+        color: ${({ theme }) => theme.colors.green_sheen };
     `};
     ${({ isActive, type }) => isActive && type === 'down' && css`
-        color: ${({ theme }) => theme.colors.attention };
+        color: ${({ theme }) => theme.colors.attention_light };
     `};
 `;

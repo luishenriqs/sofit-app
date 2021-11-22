@@ -13,8 +13,8 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    height: ${RFPercentage(42)}px;
-    background-color: ${({ theme }) => theme.colors.primary };
+    height: ${RFPercentage(32)}px;
+    background-color: ${({ theme }) => theme.colors.green_sheen };
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
@@ -34,13 +34,8 @@ export const UserInfo = styled.View`
     align-items: center;
 `;
 
-export const Photo = styled.Image`
-    width: ${RFValue(48)}px;
-    height: ${RFValue(48)}px;
-    border-radius: 10px;
-`;
-
 export const User = styled.View`
+    flex-direction: row;
     margin-left: 17px;
 `;
 
@@ -70,7 +65,7 @@ export const Cards = styled.ScrollView.attrs({
 })`
     width: 100%;
     position: absolute;
-    margin-top: ${RFPercentage(20)}px;
+    margin-top: ${RFPercentage(18)}px;
 `;
 
 export const Transactions = styled.View`
@@ -81,18 +76,9 @@ padding: 0 24px;
 export const Title = styled.Text`
     font-size: ${RFValue(18)}px;
     font-family: ${({ theme }) => theme.fonts.regular };
-    margin-top: ${RFPercentage(16)}px;
+    margin-top: ${RFPercentage(12)}px;
     margin-bottom: ${RFPercentage(2)}px;
 `;
-
-export const TransactionList = styled(
-    FlatList as new () => FlatList<IDataListProps>
-    ).attrs({
-    showsVerticalScrollIndicator: false,
-    contentContainerStyle: {
-        paddingBottom: getBottomSpace()
-    },
-})``;
 
 export const LoadingContainer = styled.View`
     flex: 1;

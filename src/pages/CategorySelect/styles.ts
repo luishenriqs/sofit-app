@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
 interface ICategoryProps {
@@ -36,7 +36,7 @@ export const Category = styled.TouchableOpacity<ICategoryProps>`
     };
 `;
 
-export const Icon = styled(MaterialIcons)`
+export const Icon = styled(Feather)`
     font-size: ${RFValue(20)}px;
     margin: 0 16px;
 `;
